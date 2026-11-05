@@ -1,0 +1,18 @@
+{
+  "mission_id": "mis_01JEXAMPLE0000000000000000",
+  "schema_version": "1.0.0",
+  "title": "Prepare a verified release candidate",
+  "objective": "Build and verify a release candidate from the canonical source tree",
+  "success_criteria": [
+    {"criterion_id": "SC-01", "description": "All required tests pass", "verification_method": "test_report", "mandatory": true},
+    {"criterion_id": "SC-02", "description": "Artifacts open and contain required sections", "verification_method": "artifact_inspection", "mandatory": true}
+  ],
+  "constraints": ["Do not publish or deploy without approval"],
+  "autonomy": {"level": "GUARDED", "allowed_actions": ["read_repository", "run_tests", "write_local_artifacts"], "approval_required_for": ["publish_release", "deploy"]},
+  "resource_budget": {"max_tool_calls": 80, "max_duration_seconds": 3600, "max_concurrency": 4},
+  "requested_capabilities": ["document_build", "schema_validation"],
+  "status": "PLANNED",
+  "evidence_refs": [],
+  "created_at": "2026-11-05T02:00:00Z",
+  "updated_at": "2026-11-05T02:00:00Z"
+}
