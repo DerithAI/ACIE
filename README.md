@@ -7,7 +7,7 @@
 - **Specification:** ACIE v1.0
 - **Repository:** `DerithAI/ACIE`
 - **Default branch:** `main`
-- **Publication state:** repository initialized; source package and release assets are being published in staged commits.
+- **Publication state:** repository scaffold and executable conformance subset are published; the complete manuscript, figures, and binary release assets are not yet synchronized.
 - **Normative boundary:** ACIE defines the discipline and architectural concepts. LUMEN is discussed as a reference implementation candidate, not as proof that every ACIE property is implemented or conformant.
 
 ## Repository map
@@ -30,14 +30,14 @@
 
 ## Validation
 
-The source package includes artifact validation and state-model tests. Run the checks from the repository root:
+The currently published conformance subset includes JSON Schemas, valid fixtures, the eight-component contract registry, executable state models, and automated checks. The complete whitepaper source tree is not yet present. Run the checks from the repository root:
 
 ```bash
 python -m unittest discover -s tests -v
 python tests/validate_artifacts.py
 ```
 
-The build tool and its dependencies are documented under `build/`.
+Validation dependencies are listed in `requirements-dev.txt`.
 
 ## Project principles
 
