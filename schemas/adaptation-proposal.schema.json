@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acie.example/schemas/adaptation-proposal.schema.json",
+  "title": "ACIE Adaptation Proposal",
+  "type": "object",
+  "required": ["proposal_id", "target_component", "baseline_version", "candidate_digest", "risk_class", "hypothesis", "evaluation_plan", "rollback_plan", "status"],
+  "properties": {
+    "proposal_id": {"type": "string"},
+    "target_component": {"type": "string"},
+    "baseline_version": {"type": "string"},
+    "candidate_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "risk_class": {"enum": ["A", "B", "C", "D"]},
+    "hypothesis": {"type": "string", "minLength": 1},
+    "expected_benefit": {"type": "string"},
+    "affected_scopes": {"type": "array", "items": {"type": "string"}},
+    "evaluation_plan": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "rollback_plan": {"type": "string", "minLength": 1},
+    "status": {"enum": ["PROPOSED", "TRIAGED", "REVIEW_REQUIRED", "SANDBOXED", "EVALUATED", "APPROVAL_PENDING", "STAGED", "MONITORING", "PROMOTED", "REJECTED", "ROLLED_BACK", "ABORTED"]}
+  },
+  "additionalProperties": false
+}
