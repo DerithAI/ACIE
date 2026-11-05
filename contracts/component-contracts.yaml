@@ -1,0 +1,76 @@
+apiVersion: acie/v1
+kind: ComponentContractRegistry
+metadata:
+  name: acie-canonical-components
+  version: 1.0.0
+  status: proposed-reference-contract
+conventions:
+  permission_rule: "Delegation may narrow permissions but never expand them."
+  execution_rule: "Consequential actions require a governance decision bound to the exact proposal digest."
+  persistence_rule: "Persistent Runtime records durable lifecycle transitions and execution outcomes."
+  evidence_rule: "Material outputs retain provenance, source references, and trace identifiers."
+components:
+  - id: activator-godmode
+    layer: executive
+    responsibility: "Interpret events, prioritize missions, select bounded autonomy, allocate budgets, and schedule work."
+    inputs: [event_envelope, mission_state, operator_constraints, resource_budget, policy_context]
+    outputs: [mission_plan, dispatch_request, lifecycle_transition, escalation_request]
+    permissions: [read_mission_state, schedule_assignment, request_policy_evaluation]
+    prohibited: [grant_permissions, override_policy_denial, claim_unverified_external_effect]
+    invariants: [G-01, G-02, A-01]
+  - id: personality-kernel
+    layer: cognitive
+    responsibility: "Select a versioned reasoning profile appropriate to task intent and permitted capabilities."
+    inputs: [task_context, profile_registry, capability_registry, policy_constraints]
+    outputs: [profile_selection, selection_rationale, selection_trace]
+    permissions: [read_profile_registry, read_scoped_task_context]
+    prohibited: [change_permissions, execute_external_action, treat_profile_as_identity_authority]
+    invariants: [A-01]
+  - id: swarm-coordination
+    layer: cognitive
+    responsibility: "Select workers, decompose missions, issue bounded assignments, and supervise dependencies."
+    inputs: [mission_plan, worker_registry, assignment_budget, dependency_graph]
+    outputs: [assignments, worker_status, aggregated_results]
+    permissions: [dispatch_scoped_assignment, cancel_assignment, read_authorized_artifacts]
+    prohibited: [expand_parent_scope, accept_unvalidated_worker_output_as_verified]
+    invariants: [G-02, A-01]
+  - id: deliberation-engine
+    layer: cognitive
+    responsibility: "Compare proposals and evidence, identify conflicts, preserve dissent, and produce an inspectable judgment."
+    inputs: [proposals, evidence_refs, mission_constraints, uncertainty_metadata]
+    outputs: [integrated_judgment, conflict_report, dissent_record, decision_record]
+    permissions: [read_authorized_evidence, request_verification]
+    prohibited: [execute_action, grant_approval, equate_consensus_with_truth]
+    invariants: [G-01]
+  - id: reflective-governance
+    layer: executive
+    responsibility: "Evaluate action and adaptation proposals against policy, permissions, risk, reversibility, and evidence."
+    inputs: [proposal, actor_context, policy_version, risk_assessment, evidence_refs]
+    outputs: [governance_decision, required_conditions, approval_request, audit_record]
+    permissions: [evaluate_policy, issue_scoped_decision, request_human_approval]
+    prohibited: [delegate_policy_authority_to_governed_worker, infer_approval_from_timeout]
+    invariants: [G-01, G-03, A-02, E-01]
+  - id: evolution-engine
+    layer: continuity
+    responsibility: "Convert operational evidence into versioned change proposals and supervise evaluation, promotion, and rollback."
+    inputs: [operational_evidence, baseline_version, candidate_artifact, evaluation_plan, rollback_plan]
+    outputs: [adaptation_proposal, evaluation_report, promotion_request, rollback_result]
+    permissions: [read_metrics, create_candidate, request_promotion_review]
+    prohibited: [self_promote, weaken_own_acceptance_criteria, mutate_governance_without_review]
+    invariants: [E-01, E-02, E-03]
+  - id: memory-fabric
+    layer: continuity
+    responsibility: "Validate, store, retrieve, update, scope, and govern durable knowledge and experience."
+    inputs: [memory_candidate, provenance, access_context, retrieval_query, retention_policy]
+    outputs: [memory_record, authorized_retrieval, correction_record, deletion_receipt]
+    permissions: [read_authorized_namespace, write_approved_record_class, apply_retention_policy]
+    prohibited: [expose_unauthorized_memory, elevate_retrieved_content_to_policy, bypass_deletion_propagation]
+    invariants: [G-01]
+  - id: persistent-runtime
+    layer: continuity
+    responsibility: "Manage durable events, scheduling, lifecycle, checkpoints, retries, idempotency, observability, and recovery."
+    inputs: [event_envelope, state_transition, schedule_request, action_dispatch, checkpoint_request]
+    outputs: [durable_state, execution_status, checkpoint, audit_event, reconciliation_result]
+    permissions: [persist_runtime_state, dispatch_authorized_action, reconcile_external_effect]
+    prohibited: [dispatch_without_authorization, infer_success_from_acknowledgement, silently_drop_unknown_outcome]
+    invariants: [G-01, G-04]
