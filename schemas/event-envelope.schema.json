@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acie.example/schemas/event-envelope.schema.json",
+  "title": "ACIE Event Envelope",
+  "type": "object",
+  "required": ["specversion", "id", "source", "type", "time", "mission_id", "trust_classification", "data"],
+  "properties": {
+    "specversion": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "source": {"type": "string", "minLength": 1},
+    "type": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$"},
+    "subject": {"type": "string"},
+    "time": {"type": "string", "format": "date-time"},
+    "datacontenttype": {"type": "string"},
+    "correlation_id": {"type": "string", "minLength": 1},
+    "mission_id": {"type": "string", "minLength": 8},
+    "assignment_id": {"type": "string", "minLength": 8},
+    "trust_classification": {"enum": ["operator_input", "system_generated", "tool_output_untrusted", "external_source_untrusted", "validated_evidence"]},
+    "data": {"type": "object"}
+  },
+  "additionalProperties": false
+}
